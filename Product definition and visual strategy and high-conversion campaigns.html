@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>超级产品定义与视觉转化企划 | LuminaGuard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <style>
+        /* =========================================
+           Design System: Clinical Luxury
+           ========================================= */
+        :root {
+            /* Brand Colors */
+            --c-bg: #F9F8F6; /* Aesop-style off-white */
+            --c-text-main: #1D1D1D;
+            --c-text-sub: #5E5E5E;
+            --c-accent: #2C5234; /* Apothecary Green */
+            --c-gold: #D4AF37; /* Subtle luxury accent */
+            --c-error: #A03E3E;
+            
+            /* UI Elements */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --shadow-float: 0 10px 30px rgba(0,0,0,0.06);
+            --border-light: #E5E5E5;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            background-color: var(--c-bg);
+            color: var(--c-text-main);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            color: var(--c-text-main);
+            margin-top: 0;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--c-text-sub);
+            margin-bottom: 4rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        .section-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--c-accent);
+            border-bottom: 1px solid var(--c-accent);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            margin-top: 60px;
+        }
+
+        /* --- Module 1: Product Definition Cards --- */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: #FFFFFF;
+            padding: 32px;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(0,0,0,0.03);
+            box-shadow: var(--shadow-float);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover { transform: translateY(-5px); }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .card h3 { font-size: 1.25rem; margin-bottom: 12px; }
+        .card p { font-size: 0.95rem; color: var(--c-text-sub); margin: 0; }
+
+        .tag {
+            display: inline-block;
+            background: #F0F2F0;
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            margin-top: 12px;
+            color: var(--c-accent);
+            font-weight: 600;
+        }
+
+        /* --- Module 2: Visual Strategy --- */
+        .visual-strategy {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background: white;
+            padding: 40px;
+            border-radius: var(--radius-md);
+        }
+
+        .color-palette {
+            display: flex;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .swatch {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .swatch::after {
+            content: attr(data-hex);
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            color: #888;
+            font-family: monospace;
+        }
+
+        .packaging-concept {
+            border-left: 2px solid var(--border-light);
+            padding-left: 30px;
+        }
+
+        /* --- Module 3: PDP Anatomy (Wireframe) --- */
+        .pdp-frame {
+            border: 8px solid #333;
+            border-radius: 20px;
+            max-width: 400px; /* Mobile View */
+            margin: 0 auto;
+            background: #FFF;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .pdp-header {
+            height: 50px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .block {
+            padding: 20px;
+            border-bottom: 1px dashed #ddd;
+            position: relative;
+        }
+
+        .block:hover {
+            background-color: #fcfcfc;
+        }
+
+        .block:hover::after {
+            content: attr(data-intent);
+            position: absolute;
+            right: -180px;
+            top: 20px;
+            width: 160px;
+            background: var(--c-accent);
+            color: white;
+            font-size: 0.75rem;
+            padding: 10px;
+            border-radius: 4px;
+            z-index: 10;
+        }
+        /* Connect tooltip to block */
+        .block:hover::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 30px;
+            width: 20px;
+            height: 1px;
+            background: var(--c-accent);
+        }
+
+        /* Wireframe Elements */
+        .wf-img-hero {
+            background: #EAEAEA;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-style: italic;
+        }
+        
+        .wf-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--c-accent);
+            color: white;
+            font-size: 0.7rem;
+            padding: 4px 8px;
+            text-transform: uppercase;
+        }
+
+        .wf-title { height: 20px; width: 80%; background: #333; margin-bottom: 10px; }
+        .wf-price { height: 24px; width: 30%; background: #D4AF37; margin-bottom: 20px; }
+        
+        .wf-btn-primary {
+            background: #1D1D1D;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            font-weight: 600;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .wf-trust-bar {
+            display: flex;
+            justify-content: space-between;
+            background: #F9F9F9;
+            padding: 10px 20px;
+            font-size: 0.7rem;
+            color: #666;
+        }
+
+        .wf-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            font-size: 0.8rem;
+        }
+        .wf-col-bad { background: #FFF0F0; padding: 10px; color: #999; }
+        .wf-col-good { background: #F0FFF4; padding: 10px; border: 1px solid #4CAF50; color: #2C5234; font-weight: bold; }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+    <header style="text-align: center;">
+        <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--c-accent); margin-bottom: 10px;">Confidential Strategy Deck</div>
+        <h1>LuminaGuard™</h1>
+        <p class="subtitle">The Clinical Luxury Solution for Nail Restoration</p>
+    </header>
+
+    <!-- 01. Product Definition -->
+    <div class="section-title">01. 终极产品定义 (MVP Definition)</div>
+    <div class="grid-3">
+        <div class="card">
+            <span class="card-icon">💎</span>
+            <h3>UVP 核心价值</h3>
+            <p><strong>"Heal Unseen. Reveal Clean."</strong></p>
+            <p style="margin-top: 10px;">(隐形治愈，净透新生)</p>
+            <div class="tag">Zero-Burn Tech</div>
+            <div class="tag">Invisible Finish</div>
+        </div>
+        <div class="card">
+            <span class="card-icon">🛡️</span>
+            <h3>差异化护城河</h3>
+            <p><strong>技术：</strong>生物酶缓释渗透技术，替代传统强酸，彻底解决 "Burn my skin" 痛点。</p>
+            <p style="margin-top:10px;"><strong>形态：</strong>美妆级“遮瑕修复笔”，哑光成膜，拒绝油腻黄渍。</p>
+        </div>
+        <div class="card">
+            <span class="card-icon">👩‍💼</span>
+            <h3>种子用户画像</h3>
+            <p><strong>"The Perfectionist Professional"</strong></p>
+            <p style="font-size: 0.85rem; margin-top: 8px;">30-45岁都市女性，瑜伽/健身爱好者。无法忍受粗糙的黄药水和刺鼻气味。视指甲健康为整体精致感的一部分。</p>
+        </div>
+    </div>
+
+    <!-- 02. Visual Strategy -->
+    <div class="section-title">02. 视觉感官营销 (Sensory Strategy)</div>
+    <div class="visual-strategy">
+        <div>
+            <h3>反其道而行的配色 (Color Palette)</h3>
+            <p>从“药房廉价感”（红/蓝/黄）升级为“药妆高级感”。建立信任与平静。</p>
+            <div class="color-palette">
+                <div class="swatch" style="background: #FAFAFA;" data-hex="#FAFAFA"></div>
+                <div class="swatch" style="background: #2C5234;" data-hex="#2C5234"></div>
+                <div class="swatch" style="background: #E8DCC5;" data-hex="#E8DCC5"></div>
+                <div class="swatch" style="background: #1D1D1D;" data-hex="#1D1D1D"></div>
+            </div>
+            <p style="margin-top: 20px; font-size: 0.85rem; color: #888;">Keywords: Clinical, Pure, Organic, Trust.</p>
+        </div>
+        <div class="packaging-concept">
+            <h3>开箱体验 (Unboxing)</h3>
+            <ul style="padding-left: 20px; font-size: 0.95rem; color: var(--c-text-sub);">
+                <li style="margin-bottom: 10px;"><strong>瓶身材质：</strong>茶色半透明磨砂玻璃 (Amber Frosted Glass)，防光避氧化，手感温润。</li>
+                <li style="margin-bottom: 10px;"><strong>视觉符号 (Visual Hammer)：</strong>滴管处设计为独特的“精准弯头”，强调 Targeting Precision（不伤好肉）。</li>
+                <li><strong>触觉：</strong>外盒采用未涂布棉纸（Cotton Paper），带有微凹凸的压纹，传递“透气”的心理暗示。</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 03. PDP Conversion Anatomy -->
+    <div class="section-title">03. 高转化详情页逻辑 (PDP Wireframe)</div>
+    <div style="display: flex; gap: 40px; align-items: flex-start;">
+        
+        <!-- Explanation Text -->
+        <div style="flex: 1; padding-top: 20px;">
+            <h3>AIDA 转化模型布局</h3>
+            <p>这是一个针对移动端优化的长图逻辑。请查看右侧线框图的交互提示。</p>
+            <div style="margin-top: 20px; background: #FFF; padding: 20px; border-left: 4px solid var(--c-gold);">
+                <strong>💡 转化核心：</strong><br>
+                用户在购买此类产品时处于“焦虑+怀疑”状态。首屏必须用“零痛感”安抚情绪，随后立即用“对比图”建立信心，最后用“医生背书”消除疑虑。
+            </div>
+        </div>
+
+        <!-- The Wireframe (Mobile View) -->
+        <div class="pdp-frame">
+            <div class="pdp-header">
+                <span>LuminaGuard</span>
+                <span>🛒</span>
+            </div>
+
+            <!-- 1. Attention: Hero Section -->
+            <div class="block" data-intent="【首图策略】<br>左图：光影高级感产品图<br>右图：核心卖点角标<br>目的：脱离'恶心烂脚'的低端竞争，确立品牌调性。">
+                <div class="wf-img-hero">
+                    <span class="wf-badge">New: Bio-Enzyme Tech</span>
+                    [Product Hero Shot: Amber Bottle + Clean Healthy Nail]
+                </div>
+                <div style="margin-top: 15px;">
+                    <div class="wf-title"></div>
+                    <div class="wf-title" style="width: 60%"></div>
+                    <div style="font-size: 0.8rem; margin: 10px 0; color: var(--c-accent);">🌿 0% Acid • 0% Pain • 100% Restore</div>
+                    <div class="wf-price"></div>
+                </div>
+            </div>
+
+            <!-- 2. Interest: The Hook -->
+            <div class="block" data-intent="【痛点唤醒】<br>直接攻击竞品痛点：'还在忍受烧灼感吗？'<br>场景化：展示穿高跟鞋/瑜伽时的自信。">
+                <h4 style="margin: 0 0 10px 0;">Why suffer for beauty?</h4>
+                <p style="font-size: 0.8rem; color: #666;">Stop burning your skin with harsh acids. Experience the gentle power of nature's enzymes.</p>
+                <div class="wf-comparison">
+                    <div class="wf-col-bad">
+                        Others:<br>❌ Chemical Burn<br>❌ Yellow Stains<br>❌ Messy Cream
+                    </div>
+                    <div class="wf-col-good">
+                        LuminaGuard:<br>✅ Pain-Free<br>✅ Dries Clear<br>✅ Precision Pen
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Desire: Social Proof -->
+            <div class="block" data-intent="【信任背书】<br>展示皮肤科医生形象或实验室数据。<br>GIF演示：展示液体'秒干成膜'的过程。">
+                <div class="wf-trust-bar">
+                    <span>👨‍⚕️ Derm Approved</span>
+                    <span>🔬 Lab Tested</span>
+                    <span>🇺🇸 Made in USA</span>
+                </div>
+                <div style="background: #eee; height: 150px; margin-top: 10px; display: flex; align-items: center; justify-content: center; color: #888;">
+                    [Before & After Timeline: Day 1 vs Day 14]
+                </div>
+                <p style="text-align: center; font-size: 0.7rem; color: #999; margin-top: 5px;">*Visible results in 2 weeks</p>
+            </div>
+
+            <!-- 4. Action: Sticky CTA -->
+            <div class="block" style="background: #fafafa;" data-intent="【行动召唤】<br>提供无风险承诺 (30-Day Money Back)<br>营造紧迫感。">
+                <div style="text-align: center;">
+                    <strong>Restore Confidence Today</strong>
+                    <div class="wf-btn-primary">ADD TO CART - $24.90</div>
+                    <div style="font-size: 0.7rem; color: #888; margin-top: 5px;">🛡️ 30-Day Pain-Free Guarantee</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
